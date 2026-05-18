@@ -1,4 +1,4 @@
-toml
+
 [[plugins]]
   package = "netlify-plugin-image-optim"
 
