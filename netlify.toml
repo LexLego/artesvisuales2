@@ -1,2 +1,7 @@
-[build]
-  publish = "."
+toml[[plugins]]
+  package = "netlify-plugin-image-optim"
+
+[[plugins]]
+  package = "netlify-plugin-sitemap"
+  [plugins.inputs]
+    baseUrl = "https://miceliodigital.netlify.app" 
