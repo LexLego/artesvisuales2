@@ -1,0 +1,698 @@
+:root{
+    --fondo:#07040d;
+    --panel:#120b1f;
+    --texto:#d8d3ff;
+    --magenta:#ff4fd8;
+    --violeta:#8f5dff;
+    --cyan:#5ffbff;
+    --verde:#72ff8f;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+/* =========================
+FONDO
+========================= */
+
+body{
+    margin:0;
+    background:
+        radial-gradient(circle at top, rgba(143,93,255,0.18), transparent 30%),
+        radial-gradient(circle at bottom, rgba(255,79,216,0.12), transparent 25%),
+        linear-gradient(180deg, #05030a 0%, #0a0712 100%);
+    color:var(--texto);
+    font-family:'Space Mono', monospace;
+    min-height:100vh;
+    overflow-x:hidden;
+    padding:40px 18px;
+    cursor:crosshair;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background-image:
+        radial-gradient(rgba(255,255,255,0.08) 1px, transparent 1px);
+    background-size:40px 40px;
+    pointer-events:none;
+    opacity:0.35;
+}
+
+/* =========================
+CONTENEDOR
+========================= */
+
+.grimorio{
+    max-width:950px;
+    margin:auto;
+}
+
+/* =========================
+PORTADA
+========================= */
+
+.portada{
+    position:relative;
+    overflow:hidden;
+    padding:120px 40px;
+    border-radius:28px;
+    margin-bottom:70px;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(18,11,31,0.92),
+            rgba(7,4,13,0.96)
+        );
+    border:1px solid rgba(143,93,255,0.35);
+    box-shadow:
+        0 0 40px rgba(143,93,255,0.22),
+        0 0 120px rgba(95,251,255,0.08);
+}
+
+.portada::before{
+    content:"";
+    position:absolute;
+    inset:-2px;
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(95,251,255,0.2),
+            transparent
+        );
+    animation:scan 7s linear infinite;
+    pointer-events:none;
+}
+
+@keyframes scan{
+    from{ transform:translateX(-100%); }
+    to{ transform:translateX(100%); }
+}
+
+.portada h1{
+    font-family:'Cinzel', serif;
+    font-size:4.8rem;
+    margin:0;
+    text-align:center;
+    color:var(--cyan);
+    text-shadow:
+        0 0 10px rgba(95,251,255,0.8),
+        0 0 30px rgba(95,251,255,0.4);
+}
+
+.subtitulo{
+    text-align:center;
+    margin-top:24px;
+    color:var(--magenta);
+    letter-spacing:3px;
+    text-transform:uppercase;
+    font-size:0.95rem;
+}
+
+/* =========================
+Introducción
+========================= */
+.poema-introduccion{
+
+    border-left:1px solid rgba(95,251,255,0.3);
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(18,11,31,0.75),
+            rgba(7,4,13,0.92)
+        );
+
+    box-shadow:
+        0 0 45px rgba(95,251,255,0.08);
+}
+
+.poema-introduccion h2{
+
+    color:var(--cyan);
+
+    text-shadow:
+        0 0 12px rgba(95,251,255,0.35);
+}
+
+
+/* =========================
+PIEZAS VISUALES 
+========================= */
+
+.pieza-visual{
+    position:relative;
+    margin:70px auto;
+    border-radius:28px;
+    overflow:hidden;
+    border:1px solid rgba(95,251,255,0.2);
+    background:#05030a;
+    box-shadow: 0 0 40px rgba(95,251,255,0.08);
+    padding-top:50px;
+}
+
+.pieza-visual img{
+    width:100%;
+    display:block;
+    opacity:0.92;
+    transition:0.6s ease;
+}
+
+.pieza-visual:hover img{
+    transform:scale(1.015);
+    opacity:1;
+}
+
+
+/* =========================
+POEMAS
+========================= */
+
+.poema{
+    position:relative;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(18,11,31,0.92),
+            rgba(10,7,18,0.95)
+        );
+    border-radius:26px;
+    padding:70px;
+    margin-bottom:45px;
+    border:1px solid rgba(143,93,255,0.25);
+    box-shadow:
+        0 0 25px rgba(143,93,255,0.12),
+        inset 0 0 30px rgba(255,79,216,0.03);
+    transition:0.4s ease;
+    opacity:0;
+    transform:translateY(60px);
+    animation:aparecer 1.4s ease forwards;
+}
+
+
+.poema:nth-of-type(1){ animation-delay: 0.1s; }
+.poema:nth-of-type(2){ animation-delay: 0.3s; }
+.poema:nth-of-type(3){ animation-delay: 0.5s; }
+
+@keyframes aparecer{
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.poema:hover{
+    transform:translateY(-4px);
+    box-shadow:
+        0 0 45px rgba(95,251,255,0.18),
+        0 0 80px rgba(255,79,216,0.08);
+}
+
+.poema:hover h2{
+    animation:glitch-texto 0.2s infinite;
+    text-shadow:
+        3px 0 var(--cyan),
+        -3px 0 var(--magenta);
+}
+
+.poema:hover .verso:hover{
+    animation:glitch-texto 0.5s steps(2) infinite;
+    text-shadow:
+        1px 0 var(--cyan),
+        -1px 0 var(--magenta);
+}
+
+@keyframes glitch-texto{
+    0%{ transform:translate(0); }
+    20%{ transform:translate(-1px,1px); }
+    40%{ transform:translate(1px,-1px); }
+    60%{ transform:translate(-1px,-1px); }
+    80%{ transform:translate(1px,1px); }
+    100%{ transform:translate(0); }
+}
+
+.poema::after{
+    content:"⟁";
+    position:absolute;
+    top:22px;
+    right:24px;
+    color:rgba(95,251,255,0.35);
+    font-size:1.3rem;
+}
+
+/* =========================================
+CLAVES DE PIEZA
+========================================= */
+
+.clave-pieza{
+    position:absolute;
+    top:18px;
+    left:22px;
+
+    font-size:0.72rem;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    color:rgba(95,251,255,0.55);
+    margin-bottom:30px;
+    opacity:0.7;
+    z-index:5;
+}
+
+
+
+/* =========================================
+RED
+========================================= */
+
+.nota-interaccion{
+    text-align:right;
+    margin-top:50px;
+    color:rgba(95,251,255,0.45);
+    font-size:0.75rem;
+    letter-spacing:3px;
+    text-transform:uppercase;
+}
+
+.poema-red{
+    overflow:hidden;
+}
+
+.poema-red::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        repeating-linear-gradient(
+            90deg,
+            transparent 0px,
+            rgba(95,251,255,0.03) 1px,
+            transparent 2px,
+            transparent 40px
+        );
+    pointer-events:none;
+    animation:flujoRed 12s linear infinite;
+}
+
+@keyframes flujoRed{
+    from{
+        transform:translateX(-40px);
+    }
+
+    to{
+        transform:translateX(40px);
+    }
+}
+
+.runa-red{
+    animation:parpadeoRed 2s infinite;
+}
+
+@keyframes parpadeoRed{
+    0%,100%{
+        opacity:0.35;
+    }
+
+    50%{
+        opacity:1;
+        text-shadow:0 0 12px var(--cyan);
+    }
+}
+
+.palabra-red{
+    display:inline-block;
+    transition:0.25s ease;
+}
+
+.palabra-red:hover{
+    color:var(--cyan);
+    transform:translateY(-2px);
+    text-shadow:
+        0 0 8px var(--cyan),
+        0 0 20px var(--cyan);
+}
+
+.micelio-red{
+    animation:pulsar 2.5s infinite,
+
+}
+
+/* =========================================
+COMBUSTIÓN
+========================================= */
+
+.pieza-poemario{
+    margin:80px 0;
+    border-left:1px solid rgba(95,251,255,0.15);
+    padding-left:20px;
+    position:relative;
+}
+.poema-combustion{
+    overflow:hidden;
+}
+
+.poema-combustion::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+        radial-gradient(
+            circle at bottom,
+            rgba(255,79,216,0.08),
+            transparent 55%
+        );
+    pointer-events:none;
+    animation:respiracionFuego 6s ease-in-out infinite;
+}
+
+@keyframes respiracionFuego{
+
+    0%,100%{
+        opacity:0.35;
+        transform:scale(1);
+    }
+
+    50%{
+        opacity:0.8;
+        transform:scale(1.03);
+    }
+}
+
+.runa-fuego{
+    animation:arderRuna 3s infinite;
+}
+
+@keyframes arderRuna{
+
+    0%,100%{
+        text-shadow:
+            0 0 5px rgba(255,79,216,0.3);
+    }
+
+    50%{
+        text-shadow:
+            0 0 12px var(--magenta),
+            0 0 24px var(--magenta);
+    }
+}
+
+.frase-fuego{
+    display:inline-block;
+    transition:0.3s ease;
+}
+
+.frase-fuego:hover{
+    color:#fff;
+    transform:translateX(4px);
+    text-shadow:
+        0 0 10px rgba(255,79,216,0.7),
+        0 0 20px rgba(255,79,216,0.4);
+}
+
+.glitch-raiz:hover{
+    animation:glitch-texto 0.15s infinite;
+}
+
+.incendio-vivo{
+    display:inline-block;
+    animation:fuegoIncendio 1.4s infinite;
+}
+
+@keyframes fuegoIncendio{
+
+    0%,100%{
+        text-shadow:
+            0 0 8px rgba(255,79,216,0.4);
+    }
+
+    50%{
+        text-shadow:
+            0 0 14px rgba(255,79,216,0.8),
+            0 0 28px rgba(255,79,216,0.5);
+        transform:scale(1.04);
+    }
+}
+/* =========================
+TEXTOS
+========================= */
+
+h2{
+    margin-top:0;
+    margin-bottom:45px;
+    font-family:'Cinzel', serif;
+    font-size:2.2rem;
+    font-weight:600;
+    color:var(--magenta);
+    text-shadow: 0 0 10px rgba(255,79,216,0.45);
+}
+
+p{
+    font-size:1.05rem;
+    line-height:2.15;
+    margin-bottom:36px;
+}
+
+.verso{
+    color:#d8d3ff;
+    transition:text-shadow 0.1s ease;
+}
+
+small{
+    display:block;
+    margin-top:35px;
+    color:#a89dcf;
+    line-height:1.8;
+    font-size:0.82rem;
+}
+
+.runa{
+    text-align:center;
+    color:rgba(95,251,255,0.25);
+    margin:30px 0;
+    letter-spacing:14px;
+}
+
+/* =========================
+PALABRAS VIVAS
+========================= */
+
+.pulso{
+    color:var(--verde);
+    animation:pulsar 2.5s infinite;
+    display:inline-block;
+}
+
+@keyframes pulsar{
+    0%,100%{
+        opacity:0.4;
+        text-shadow: 0 0 5px var(--verde);
+    }
+    50%{
+        opacity:1;
+        text-shadow:
+            0 0 12px var(--verde),
+            0 0 25px var(--verde);
+    }
+}
+
+.glitch-palabra:hover{
+    animation:glitch-texto 0.15s infinite;
+    color:var(--cyan);
+}
+
+/* =========================
+CONJURO GENERATIVO 
+========================= */
+
+.pieza-sonora-conjuro{
+    position:relative;
+    background:
+        linear-gradient(
+            180deg,
+            rgba(18,11,31,0.96),
+            #04020a
+        );
+    border-radius:30px;
+    padding:80px;
+    margin-bottom:50px;
+    border:2px solid var(--verde);
+    box-shadow:
+        0 0 40px rgba(114,255,143,0.15),
+        inset 0 0 50px rgba(114,255,143,0.02);
+    opacity: 0;
+    transform: translateY(60px);
+    animation: aparecer 1.4s ease forwards;
+    animation-delay: 0.7s;
+}
+
+.pieza-sonora-conjuro h2{
+    color:var(--verde);
+    text-shadow: 0 0 15px rgba(114,255,143,0.5);
+}
+
+
+.estado-sistema{
+    text-align:center;
+    margin-bottom:30px;
+    color:var(--verde);
+    letter-spacing:3px;
+    font-size:0.75rem;
+    text-transform:uppercase;
+    opacity:0.75;
+    animation:pulsarSistema 2s infinite;
+}
+
+@keyframes pulsarSistema{
+    0%,100%{ opacity:0.4; }
+    50%{ opacity:1; }
+}
+
+.activo-sonoro{
+    transform:scale(1.02);
+    text-shadow:
+        0 0 12px currentColor,
+        0 0 22px currentColor;
+
+    background: rgba(255,255,255,0.05);
+}
+
+/* =========================
+BOTÓN
+========================= */
+
+.btn-ritual{
+    display:block;
+    margin:0 auto 35px;
+    background:transparent;
+    border:1px solid var(--verde);
+    color:var(--verde);
+    font-family:'Space Mono', monospace;
+    padding:16px 36px;
+    font-size:1rem;
+    border-radius:50px;
+    cursor:pointer;
+    text-transform:uppercase;
+    letter-spacing:3px;
+    transition:all 0.4s ease;
+}
+
+.btn-ritual:hover,
+.btn-ritual.activo{
+    background:var(--verde);
+    color:#05030a;
+    box-shadow: 0 0 25px var(--verde);
+}
+
+.instruccion{
+    text-align:center;
+    color:rgba(95,251,255,0.6);
+    font-size:0.78rem;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin-bottom:45px;
+}
+
+.palabra-invocacion{
+    cursor:pointer;
+}
+
+.imagen-invocada{
+    position:fixed;
+    width:240px;
+
+    pointer-events:none;
+
+    opacity:0;
+
+    z-index:9999;
+
+    mix-blend-mode:screen;
+
+    animation:vision 4s ease forwards;
+}
+
+@keyframes vision{
+
+    0%{
+        opacity:0;
+        transform:
+        scale(0.8)
+        rotate(-2deg);
+    }
+
+    20%{
+        opacity:0.9;
+    }
+
+    100%{
+        opacity:0;
+        transform:
+        scale(1.08)
+        rotate(2deg);
+    }
+}
+
+/* =========================
+VERSOS INTERACTIVOS
+========================= */
+
+.verso-sintetizador{
+    cursor:pointer;
+    padding:4px 8px;
+    border-radius:4px;
+    transition:
+    color 0.2s ease,
+    text-shadow 0.2s ease,
+    transform 0.2s ease;
+    
+    display:inline-block;
+}
+
+
+.nodo-chispa:hover{
+    color:var(--cyan);
+    text-shadow: 0 0 10px var(--cyan);
+    background: rgba(95,251,255,0.05);
+}
+
+.nodo-raiz:hover{
+    color:var(--verde);
+    text-shadow: 0 0 10px var(--verde);
+    background: rgba(114,255,143,0.05);
+}
+
+.nodo-sky:hover{
+    color:var(--magenta);
+    text-shadow: 0 0 10px var(--magenta);
+    background: rgba(255,79,216,0.05);
+}
+
+/* =========================
+FOOTER
+========================= */
+
+footer{
+    text-align:center;
+    padding:50px 20px 20px;
+    color:#7c73a5;
+    font-size:0.9rem;
+}
+
+/* =========================
+RESPONSIVE
+========================= */
+
+@media(max-width:768px){
+    .portada{ padding:90px 25px; }
+    .portada h1{ font-size:2.8rem; }
+    .poema, .pieza-sonora-conjuro{ padding:45px 28px; }
+    h2{ font-size:1.6rem; }
+    p{ font-size:0.96rem; line-height:2; }
+    .btn-ritual{ width:100%; font-size:0.85rem; }
+}
